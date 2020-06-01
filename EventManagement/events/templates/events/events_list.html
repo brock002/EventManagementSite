@@ -1,0 +1,60 @@
+{% extends 'events/base.html' %}
+{% load dictionary_lookup %}
+{% block content %}
+<div class="mx-5">
+<table class="table table-striped table-dark table-borderless table-responsive-xl">
+    {% if user.is_authenticated %}
+        <tr>
+            <td>
+                <h3>Events You Follow:</h3> <br>
+                <a href="{% url 'events:user_follows' %}">Browse all!>></a>
+            </td>
+            {% for follow in user.follower_set.all|slice:":3" %}
+                <td>
+                    <p>
+                        <h5><a href="{% url 'events:event_detail' pk=follow.event.pk %}">{{follow.event.name}}</a></h5>
+                        Starts on: {{follow.event.start_date}}
+                    </p>
+                </td>
+            {% empty %}
+                <td>You haven't followed any events yet</td>
+            {% endfor %}
+        </tr>
+    {% endif %}
+</table>        
+    <hr>
+<table class="table table-striped table-dark table-borderless">
+    <thead>
+        <td colspan="4">
+            <h3>Popular Events in "{{city.name|title}}"</h3>
+            <p class="text-muted">
+                **Click Browse all in a category to get all events in that category!** <br>
+                **You can change the location/city in the dropdown menu above!**
+            </p>
+        </td>
+    </thead>
+    {% for id, name in category_ids %}
+        <tr>
+            <td>
+                <p>
+                    <h4>{{name}} events:</h4> <br>
+                    <a href="{% url 'events:search' city_pk=city.pk category_pk=id %}">Browse all!>></a>
+                </p>
+            </td>
+            {% for event in events_dict|dictlookup:id %}
+                <td>
+                    <p>            
+                        <h5><a class="card-link" href="{% url 'events:event_detail' pk=event.pk %}">{{event.name}}</a></h5>
+                        Starts on: {{event.start_date}}
+                    </p>
+                </td>      
+            {% empty %}
+                <td>
+                    <h5>No Event Available!</h5>
+                </td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}    

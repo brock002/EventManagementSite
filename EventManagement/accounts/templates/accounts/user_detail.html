@@ -1,0 +1,75 @@
+{% extends 'events/base.html' %}
+
+
+{% block content %}
+
+<div class="mx-3">
+    <h3><strong>{{event_organiser.username}}</strong></h3>
+    {{event_organiser.email}} <hr>
+    <div class="row">
+        <div class="col-8">
+            {% if event_organiser.userextrainfo %}
+                <div class="card bg-dark mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            {% if event_organiser.userextrainfo.profile_pic %}
+                                <img src="{{ event_organiser.userextrainfo.profile_pic.url }}" class="card-img" alt="No Image Available">
+                            {% else %}
+                                <p>No Image Available</p>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ event_organiser.userextrainfo.full_name|title }}</h5>
+                                <p class="card-text">{{ event_organiser.userextrainfo.bio }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if user == event_organiser %}
+                    <a class="btn btn-warning" href="{% url 'accounts:update_user_extra' pk=event_organiser.userextrainfo.pk %}">
+                        <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"/>
+                        </svg>
+                        Edit details
+                    </a>
+                {% endif %}     
+            {% else %}  
+                {% if user == event_organiser %}
+                    <a class="btn btn-info" href="{% url 'accounts:create_user_extra' %}">Complete Your Profile to Create Events!</a>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="col">
+            {% if user == event_organiser %}
+                Your Events:
+            {% else %}
+                Events by {{event_organiser.username}}:
+            {% endif %}
+                
+            <ul>
+                {% for event in event_organiser.event_set.all %}
+                    <li><a href="{% url 'events:event_detail' pk=event.pk %}">{{event.name}}</a></li>
+                {% empty %}
+                    <li>No Event Available!</li>
+                {% endfor %}
+            </ul>
+            
+            <hr>
+            {% if user == event_organiser %}
+                Events you follow:      
+                <ul>
+                    {% for event in user.follower_set.all %}
+                        <li><a href="{% url 'events:event_detail' pk=event.event.pk %}">{{event.event.name}}</a></li>
+                    {% empty %}
+                        <li>You haven't followed any events yet!</li>
+                    {% endfor %}
+                </ul>    
+            {% endif %}
+        </div>
+    </div>        
+</div>
+
+{% endblock %}
