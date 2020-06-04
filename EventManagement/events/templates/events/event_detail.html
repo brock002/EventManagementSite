@@ -50,7 +50,7 @@
             {% endif %}
             <hr>
 
-            <h2>{{event.name}}</h2>
+            <h2>{{event.name|title}}</h2>
             <p>
                 Organiser/Co-ordinator- {{event.organiser.userextrainfo.full_name|title}}:<a href="{% url 'accounts:user_detail' pk=event.organiser.pk %}">@{{event.organiser.username}}</a> <br>
                 Orgainser's Email Address- {{event.organiser.email}} <br>

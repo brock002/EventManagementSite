@@ -51,7 +51,7 @@
                 
             <ul>
                 {% for event in event_organiser.event_set.all %}
-                    <li><a href="{% url 'events:event_detail' pk=event.pk %}">{{event.name}}</a></li>
+                    <li><a href="{% url 'events:event_detail' pk=event.pk %}">{{event.name|title}}</a></li>
                 {% empty %}
                     <li>No Event Available!</li>
                 {% endfor %}
@@ -62,7 +62,7 @@
                 Events you follow:      
                 <ul>
                     {% for event in user.follower_set.all %}
-                        <li><a href="{% url 'events:event_detail' pk=event.event.pk %}">{{event.event.name}}</a></li>
+                        <li><a href="{% url 'events:event_detail' pk=event.event.pk %}">{{event.event.name|title}}</a></li>
                     {% empty %}
                         <li>You haven't followed any events yet!</li>
                     {% endfor %}

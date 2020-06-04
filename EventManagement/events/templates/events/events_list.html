@@ -12,7 +12,7 @@
             {% for follow in user.follower_set.all|slice:":3" %}
                 <td>
                     <p>
-                        <h5><a href="{% url 'events:event_detail' pk=follow.event.pk %}">{{follow.event.name}}</a></h5>
+                        <h5><a href="{% url 'events:event_detail' pk=follow.event.pk %}">{{follow.event.name|title}}</a></h5>
                         Starts on: {{follow.event.start_date}}
                     </p>
                 </td>
@@ -44,7 +44,7 @@
             {% for event in events_dict|dictlookup:id %}
                 <td>
                     <p>            
-                        <h5><a class="card-link" href="{% url 'events:event_detail' pk=event.pk %}">{{event.name}}</a></h5>
+                        <h5><a class="card-link" href="{% url 'events:event_detail' pk=event.pk %}">{{event.name|title}}</a></h5>
                         Starts on: {{event.start_date}}
                     </p>
                 </td>      
