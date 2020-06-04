@@ -28,7 +28,7 @@ urlpatterns = [
     # search view links
     path('search/<int:city_pk>', views.search_view, name='search'),
     path('search/<int:city_pk>/<int:category_pk>', views.search_view, name='search'),
-    path('search/<int:city_pk>/<int:category_pk>/filter/by/this/<str:filter>', views.search_view, name='search'),
     path('search/<int:city_pk>/<str:sr_string>/filter/by/this/<str:filter>', views.search_view, name='search'),
+    path('search/<int:city_pk>/<int:category_pk>/filter/by/this/<str:filter>', views.search_view, name='search'),
     path('your/follows', views.user_follows, name='user_follows'),
 ]
