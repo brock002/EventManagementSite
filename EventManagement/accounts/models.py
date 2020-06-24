@@ -22,9 +22,3 @@ class UserExtraInfo(models.Model):
         from django.urls import reverse
         return reverse('accounts:user_detail', kwargs={'pk': self.user.pk})
 
-
-# SuperUser:
-# 1. brock::brock002
-# Regular User:
-# 1. sampleuser::testpassword
-# 2. NewUser::testpass
