@@ -21,4 +21,3 @@ class UserExtraInfo(models.Model):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('accounts:user_detail', kwargs={'pk': self.user.pk})
-
