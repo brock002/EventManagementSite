@@ -1,60 +1,86 @@
 {% extends 'events/base.html' %}
 {% load dictionary_lookup %}
 {% block content %}
-<div class="mx-5">
-<table class="table table-striped table-dark table-borderless table-responsive-xl">
-    {% if user.is_authenticated %}
-        <tr>
-            <td>
-                <h3>Events You Follow:</h3> <br>
-                <a href="{% url 'events:user_follows' %}">Browse all!>></a>
-            </td>
-            {% for follow in user.follower_set.all|slice:":3" %}
-                <td>
-                    <p>
-                        <h5><a href="{% url 'events:event_detail' pk=follow.event.pk %}">{{follow.event.name|title}}</a></h5>
-                        Starts on: {{follow.event.start_date}}
-                    </p>
-                </td>
-            {% empty %}
-                <td>You haven't followed any events yet</td>
-            {% endfor %}
-        </tr>
+
+<!-- Events followed by the user -->
+{% if user.is_authenticated %}
+<h3>Events You Follow:</h3>
+    <div class="table-responsive scrollbar-hidden">
+        <table class="table table-dark table-bordered border border-secondary">
+                <tr>
+                    {% for follow in user.follower_set.all %}
+                        <td class="min-width-400">
+                            <p>
+                                <h5><a href="{% url 'events:event_detail' pk=follow.event.pk %}">{{follow.event.name|title}}</a></h5>
+                                Starts on: {{follow.event.start_date}}
+                            </p>
+                        </td>
+                    {% empty %}
+                        <td>You haven't followed any events yet</td>
+                    {% endfor %}
+                </tr>
+        </table>
+    </div><hr><br>
+{% endif %}
+
+<!-- Events in the selected city -->
+<u>
+    <h4 class="py-2 bg-dark" style="text-align: center;">Popular Events in {{city.name|title}}</h4>
+</u>
+{% for id, name in category_ids %}
+    {% if events_dict|dictlookup:id|length > 0 %}
+        <h5>{{name}} events:</h5>
+        <div class="table-responsive scrollbar-hidden">
+            <table class="table table-dark table-bordered border border-secondary">
+                <tr>
+                    {% for event in events_dict|dictlookup:id %}
+                        <td class="min-width-400">
+                            <p>       
+                                <h5><a class="card-link" href="{% url 'events:event_detail' pk=event.pk %}">{{event.name|title}}</a></h5>
+                                Starts on: {{event.start_date}}
+                            </p>
+                        </td>      
+                    {% empty %}
+                        <td>
+                            <h5>No Event Available!</h5>
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table> <br>
+        </div>
     {% endif %}
-</table>        
-    <hr>
-<table class="table table-striped table-dark table-borderless">
-    <thead>
+{% endfor %}
+
+
+{% endblock %}
+
+
+<!-- previous version codes... thought may need later -->
+<!-- <thead>
         <td colspan="4">
-            <h3>Popular Events in "{{city.name|title}}"</h3>
+            
             <p class="text-muted">
                 **Click Browse all in a category to get all events in that category!** <br>
                 **You can change the location/city in the dropdown menu above!**
             </p>
         </td>
-    </thead>
-    {% for id, name in category_ids %}
-        <tr>
-            <td>
+    </thead> -->
+
+    <!-- <td>
                 <p>
-                    <h4>{{name}} events:</h4> <br>
                     <a href="{% url 'events:search' city_pk=city.pk category_pk=id %}">Browse all!>></a>
                 </p>
-            </td>
-            {% for event in events_dict|dictlookup:id %}
-                <td>
-                    <p>            
-                        <h5><a class="card-link" href="{% url 'events:event_detail' pk=event.pk %}">{{event.name|title}}</a></h5>
-                        Starts on: {{event.start_date}}
-                    </p>
-                </td>      
-            {% empty %}
-                <td>
-                    <h5>No Event Available!</h5>
-                </td>
-            {% endfor %}
-        </tr>
-    {% endfor %}
-</table>
-</div>
-{% endblock %}    
+            </td> -->
+            <!-- slicing events lists to 4 or 3 items is happening is the events_list view -->
+            
+
+<!-- tried puting buttons for scrolling -->
+<!-- <td>
+                        <button style="position: absolute;"  onclick="scrollWin(-100, 0)">Scroll left</button>
+                    </td> -->
+                    <!-- <td class="min-width-400">
+                        <a href="{% url 'events:user_follows' %}">Browse all!>></a>
+                    </td> -->
+<!-- <td>
+                        <button onclick="scrollWin(100, 0)">Scroll right</button>
+                    </td> -->

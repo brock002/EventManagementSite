@@ -3,10 +3,10 @@
 
 {% block content %}
 
-<div class="border border-info">
+<div class="">
     <div class="row justify-content-around">
     <!-- Event details section -->
-        <div class="col-8 m-4">
+        <div class="col-8 m-2">
             <!-- Event image section -->
             {% if event.eventimage %}
                 <div id="carouselExampleControls" class="carousel slide mt-2" data-ride="carousel">
@@ -108,11 +108,13 @@
                     <span class="badge badge-light">{{event.follower_set.count}}</span> follower
                 </button>
                 <div class="collapse" id="collapseExample">
-                    <ul class="list-group mt-2">
+                    <ul class="list-group mt-2 w-50">
                         {% for follower in event.follower_set.all %}
-                            <li class="list-group-item list-group-item-secondary">{{follower.follower.username}}</li>
+                            <a class="list-group-item list-group-item-action list-group-item-dark" href="{% url 'accounts:user_detail' pk=follower.follower.pk %}">
+                                {{follower.follower.username}}
+                            </a>
                         {% empty %}
-                            <li class="list-group-item list-group-item-secondary">This event doesn't have any followers yet!</li>
+                            <li class="list-group-item list-group-item-dark">This event doesn't have any followers yet!</li>
                         {% endfor %}
                     </ul>
                 </div>     

@@ -59,14 +59,16 @@
             
             <hr>
             {% if user == event_organiser %}
-                Events you follow:      
-                <ul>
-                    {% for event in user.follower_set.all %}
-                        <li><a href="{% url 'events:event_detail' pk=event.event.pk %}">{{event.event.name|title}}</a></li>
-                    {% empty %}
-                        <li>You haven't followed any events yet!</li>
-                    {% endfor %}
-                </ul>    
+                Events you follow:
+                <div class="">
+                    <ul>
+                        {% for event in user.follower_set.all %}
+                            <li><a href="{% url 'events:event_detail' pk=event.event.pk %}">{{event.event.name|title}}</a></li>
+                        {% empty %}
+                            <li>You haven't followed any events yet!</li>
+                        {% endfor %}
+                    </ul>
+                </div> 
             {% endif %}
         </div>
     </div>        

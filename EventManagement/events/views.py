@@ -25,7 +25,7 @@ def events_list(request, pk=1):
     event_list = event_list.annotate(follower_count=Count("follower"))
     events_by_city={}
     for num, name in cat_ids:
-        events_by_city[num]=event_list.filter(category__id=num).order_by("-follower_count")[:3]
+        events_by_city[num]=event_list.filter(category__id=num).order_by("-follower_count")
     # print(events_by_city)
     return render(request, "events/events_list.html", {"city":city, 'category_ids':cat_ids, 'events_dict':events_by_city, 'cities_list':City.objects.all()})
 
@@ -71,13 +71,6 @@ def search_view(request, city_pk, category_pk=0, sr_string='', filter=''):
             elif filter=='week':
                 event_list = event_list.filter(start_date__year=current[0], start_date__week=current[1])
         return render(request, 'events/search.html', {'events':event_list, 'city':city, 'sr_string':sr_string, 'filtered':filter})
-
-def user_follows(request):
-    events_list = []
-    for follow in Follower.objects.filter(follower=request.user):
-        events_list.append(follow.event)
-
-    return render(request, 'events/search.html', {'events':events_list, 'follow':True})
 
 @login_required
 def follow_event(request, pk):
@@ -139,3 +132,11 @@ class UpdateEventImages(UpdateView, LoginRequiredMixin):
 #             event.save()
 #             return HttpResponseRedirect(reverse_lazy('events:event_detail', kwargs={"pk":event.pk}))
 #     return render(request, 'events/event_form.html', {'form':form})
+
+# function for browse all in user following events(complete waste)
+# def user_follows(request):
+#     events_list = []
+#     for follow in Follower.objects.filter(follower=request.user):
+#         events_list.append(follow.event)
+
+#     return render(request, 'events/search.html', {'events':events_list, 'follow':True})
