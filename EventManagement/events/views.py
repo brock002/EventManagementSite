@@ -25,8 +25,7 @@ def events_list(request, pk=1):
     event_list = event_list.annotate(follower_count=Count("follower"))
     events_by_city={}
     for num, name in cat_ids:
-        events_by_city[num]=event_list.filter(category__id=num).order_by("-follower_count")
-    # print(events_by_city)
+        events_by_city[num]=event_list.filter(category__id=num).order_by("-follower_count")[:10]
     return render(request, "events/events_list.html", {"city":city, 'category_ids':cat_ids, 'events_dict':events_by_city, 'cities_list':City.objects.all()})
 
 def event_detail(request, pk):
@@ -45,20 +44,11 @@ def event_detail(request, pk):
     else:
         return render(request, "events/event_detail.html", {'event':event, 'city':city, 'address':address, 'follow':True})   
 
-def search_view(request, city_pk, category_pk=0, sr_string='', filter=''):
+def search_view_for_strings(request, city_pk, sr_string='', filter=''):
     from django.utils import timezone
     current = timezone.now().date().isocalendar()
     city = City.objects.get(pk=city_pk)
     event_list = Event.objects.filter(city=city)
-    if category_pk!=0:
-        category = Category.objects.get(pk=category_pk)
-        event_list = event_list.filter(category=category)
-        if filter!="":
-            if filter=='month':
-                event_list = event_list.filter(start_date__year=current[0], start_date__month=timezone.now().month)
-            elif filter=='week':
-                event_list = event_list.filter(start_date__year=current[0], start_date__week=current[1])
-        return render(request, 'events/search.html', {'events':event_list, 'city':city, 'category':category, 'filtered':filter})
     if request.method == "POST":
         search_string = request.POST.get('string')
         event_list = event_list.filter(name__contains=search_string)
@@ -70,7 +60,21 @@ def search_view(request, city_pk, category_pk=0, sr_string='', filter=''):
                 event_list = event_list.filter(start_date__year=current[0], start_date__month=timezone.now().month)
             elif filter=='week':
                 event_list = event_list.filter(start_date__year=current[0], start_date__week=current[1])
-        return render(request, 'events/search.html', {'events':event_list, 'city':city, 'sr_string':sr_string, 'filtered':filter})
+        return render(request, 'events/search.html', {'events':event_list, 'city':city, 'sr_string':sr_string})
+
+def search_view_for_categories(request, city_pk, category_pk, filter='', dumb=0):
+    from django.utils import timezone
+    current = timezone.now().date().isocalendar()
+    city = City.objects.get(pk=city_pk)
+    event_list = Event.objects.filter(city=city)
+    category = Category.objects.get(pk=category_pk)
+    event_list = event_list.filter(category=category)
+    if filter!="":
+        if filter=='month':
+            event_list = event_list.filter(start_date__year=current[0], start_date__month=timezone.now().month)
+        elif filter=='week':
+            event_list = event_list.filter(start_date__year=current[0], start_date__week=current[1])
+    return render(request, 'events/search.html', {'events':event_list, 'city':city, 'category':category, 'filtered':filter})
 
 @login_required
 def follow_event(request, pk):

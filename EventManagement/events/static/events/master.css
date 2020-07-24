@@ -14,11 +14,6 @@ a{
     color: aqua;
 }
 
-.min-width-400 {
-    min-width: 350px;
-    text-align: center;
-}
-
 .scrollbar-hidden::-webkit-scrollbar {
     display: none;
-  }
+}

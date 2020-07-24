@@ -13,7 +13,7 @@
                     <div class="row no-gutters">
                         <div class="col-md-4">
                             {% if event_organiser.userextrainfo.profile_pic %}
-                                <img src="{{ event_organiser.userextrainfo.profile_pic.url }}" class="card-img" alt="No Image Available">
+                                <img height="100%" width="100%" src="{{ event_organiser.userextrainfo.profile_pic.url }}" class="card-img" alt="No Image Available">
                             {% else %}
                                 <p>No Image Available</p>
                             {% endif %}
@@ -42,30 +42,42 @@
                 {% endif %}
             {% endif %}
         </div>
-        <div class="col">
+        <div class="col"> 
+            <strong>
             {% if user == event_organiser %}
                 Your Events:
             {% else %}
                 Events by {{event_organiser.username}}:
             {% endif %}
+            </strong>
                 
-            <ul>
+            <ul class="list-group w-75 scrollbar-hidden" style="overflow: scroll; height: 280px;">
                 {% for event in event_organiser.event_set.all %}
-                    <li><a href="{% url 'events:event_detail' pk=event.pk %}">{{event.name|title}}</a></li>
+                    <a style="font-size: 0.8em;" class="list-group-item list-group-item-action list-group-item-info" href="{% url 'events:event_detail' pk=event.pk %}">
+                        <strong>{{event.name|title}}</strong>&nbsp;
+                        <div class="text-muted">
+                            Start date: {{event.start_date}}
+                        </div>
+                    </a>
                 {% empty %}
-                    <li>No Event Available!</li>
+                    <li class="list-group-item list-group-item-dark">No Event Available!</li>
                 {% endfor %}
             </ul>
             
             <hr>
             {% if user == event_organiser %}
-                Events you follow:
-                <div class="">
-                    <ul>
+                <strong>Events you follow:</strong>
+                <div>
+                    <ul class="list-group w-75 scrollbar-hidden" style="overflow: scroll; height: 280px;">
                         {% for event in user.follower_set.all %}
-                            <li><a href="{% url 'events:event_detail' pk=event.event.pk %}">{{event.event.name|title}}</a></li>
+                            <a style="font-size: 0.8em;" class="list-group-item list-group-item-action list-group-item-info" href="{% url 'events:event_detail' pk=event.event.pk %}">
+                                <strong>{{event.event.name|title}}</strong> &nbsp;
+                                <div class="text-muted">
+                                    Start date: {{event.event.start_date}}
+                                </div>
+                            </a>
                         {% empty %}
-                            <li>You haven't followed any events yet!</li>
+                            <li class="list-group-item list-group-item-dark">You haven't followed any events yet!</li>
                         {% endfor %}
                     </ul>
                 </div> 

@@ -66,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -128,3 +129,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'events:events_list'
 LOGOUT_REDIRECT_URL = 'events:events_list'
+
+# Email Settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# For deployment the followinng is needed
+# host: EMAIL_HOST
+# port: EMAIL_PORT
+# username: EMAIL_HOST_USER
+# password: EMAIL_HOST_PASSWORD
+# use_tls: EMAIL_USE_TLS
+# use_ssl: EMAIL_USE_SSL
+# timeout: EMAIL_TIMEOUT
+# ssl_keyfile: EMAIL_SSL_KEYFILE
+# ssl_certfile: EMAIL_SSL_CERTFILE

@@ -38,7 +38,7 @@
         <ul class="navbar-nav mr-auto ml-3">
             
             {% if city %}
-              <form action="{% url 'events:search' city_pk=city.pk %}" method="POST" class="form-inline my-2 my-lg-0">
+              <form action="{% url 'events:search_strings' city_pk=city.pk %}" method="POST" class="form-inline my-2 my-lg-0">
                 {% csrf_token %}
                 <input class="form-control mr-sm-2" name="string" type="search" minlength="1" placeholder="Search Events" aria-label="Search" required>
                 <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-5" type="submit">
@@ -135,13 +135,5 @@
     </div>
         
 </body>
-<script>
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
-
-//   function scrollWin(x, y) {
-//     window.scrollBy(x, y);
-//   }
-</script>
+<script src="{% static 'events/myscript.js' %}"></script>
 </html>
