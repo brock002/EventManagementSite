@@ -13,8 +13,8 @@
                 </a>
               
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'events:search_categories' city_pk=city.pk category_pk=category.pk filter='week' dumb=1 %}">This Weekend</a>
-                    <a class="dropdown-item" href="{% url 'events:search_categories' city_pk=city.pk category_pk=category.pk filter='month' dumb=1 %}">This Month</a>
+                    <a class="dropdown-item" href="{% url 'events:search_categories' city_pk=city.pk category_pk=category.pk filter='week' %}">This Weekend</a>
+                    <a class="dropdown-item" href="{% url 'events:search_categories' city_pk=city.pk category_pk=category.pk filter='month' %}">This Month</a>
                     {% if filtered %}
                         <a class="dropdown-item" href="{% url 'events:search_categories' city_pk=city.pk category_pk=category.pk %}">View all</a>  
                     {% endif %}  

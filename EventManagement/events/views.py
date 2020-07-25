@@ -62,7 +62,7 @@ def search_view_for_strings(request, city_pk, sr_string='', filter=''):
                 event_list = event_list.filter(start_date__year=current[0], start_date__week=current[1])
         return render(request, 'events/search.html', {'events':event_list, 'city':city, 'sr_string':sr_string})
 
-def search_view_for_categories(request, city_pk, category_pk, filter='', dumb=0):
+def search_view_for_categories(request, city_pk, category_pk, filter=''):
     from django.utils import timezone
     current = timezone.now().date().isocalendar()
     city = City.objects.get(pk=city_pk)
