@@ -17,3 +17,7 @@ a{
 .scrollbar-hidden::-webkit-scrollbar {
     display: none;
 }
+
+.modal-header {
+    background-color: #14272e;
+}

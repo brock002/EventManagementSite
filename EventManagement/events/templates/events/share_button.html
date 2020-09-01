@@ -1,0 +1,27 @@
+<!-- share button modal -->
+<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#shareButtonModal">
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-share-fill" fill="#6591b5" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M12.024 3.797L4.499 7.56l-.448-.895 7.525-3.762.448.894zm-.448 9.3L4.051 9.335 4.5 8.44l7.525 3.763-.448.894z"/>
+        <path fill-rule="evenodd" d="M13.5 5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm-11-5.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+    </svg>
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="shareButtonModal" tabindex="-1" role="dialog" aria-labelledby="shareButtonModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shareButtonModalTitle">Share Event</h5>
+                <button type="button" class="btn btn-sm btn-outline-info" data-dismiss="modal">Close</button>
+            </div>
+
+            <div class="modal-body">
+                <p style="color: black;" class="border border-secondary p-2">{{ request.build_absolute_uri }}</p>
+                <button class="btn btn-sm btn-outline-dark" id="copybtn" data-clipboard-text="{{ request.build_absolute_uri }}" data-toggle="tooltip" data-placement="top" title="Copied!">
+                    Copy Link
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

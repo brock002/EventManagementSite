@@ -58,7 +58,7 @@
                 {% if event.address %}
                     Event Address/Location- {{event.address|title}} &nbsp;
                     <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{address}}">
-                        <button type="button" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="Click to search the location in Google maps">
+                        <button type="button" class="btn btn-sm btn-success alwaysOnTooltips" data-toggle="tooltip" data-placement="bottom" title="Click to search the location in Google maps">
                             <svg class="bi bi-geo-alt" width="1.2em" height="1.2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                             </svg>
@@ -107,6 +107,7 @@
                 <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     <span class="badge badge-light">{{event.follower_set.count}}</span> follower
                 </button>
+                {% include 'events/share_button.html' %}
                 <div class="collapse" id="collapseExample">
                     <ul class="list-group mt-2 w-50">
                         {% for follower in event.follower_set.all %}
@@ -120,26 +121,32 @@
                 </div>     
             {% else %}
                 {% if user.is_authenticated %}
-                    <span class="badge badge-light">{{event.follower_set.count}}</span> follower <br>
+                    <div style="width: fit-content;" class="bg-primary p-2">
+                        <span class="badge badge-light">{{event.follower_set.count}}</span> follower
+                    </div>
+
                     {% if follow %}
-                       <br> <a class="btn btn-danger" href="{% url 'events:follow_event' pk=event.pk %}">
+                       <br> <a class="btn btn-sm btn-danger" href="{% url 'events:follow_event' pk=event.pk %}">
                             <svg class="bi bi-heart-fill" width="1em" height="1em" viewBox="0 0 16 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" clip-rule="evenodd"/>
                             </svg> 
                             Unfollow
                         </a>
                     {% else %}
-                       <br> <a class="btn btn-info" href="{% url 'events:follow_event' pk=event.pk %}">
+                       <br> <a class="btn btn-sm btn-info" href="{% url 'events:follow_event' pk=event.pk %}">
                             <svg class="bi bi-heart-fill" width="1em" height="1em" viewBox="0 0 16 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" clip-rule="evenodd"/>
                             </svg>   
                             Follow
                         </a>
                     {% endif %}
+                    {% include 'events/share_button.html' %}
+
                 {% else %}
-                    <button type="button" class="btn text-white" data-toggle="tooltip" data-placement="bottom" title="Login to follow event">
+                    <button type="button" class="btn btn-sm btn-primary alwaysOnTooltips" data-toggle="tooltip" data-placement="bottom" title="Login to follow event">
                         <span class="badge badge-light">{{event.follower_set.count}}</span> follower <br>
                     </button>
+                    {% include 'events/share_button.html' %}
                 {% endif %}
             {% endif %}
         </div>
