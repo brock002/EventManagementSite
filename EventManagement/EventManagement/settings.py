@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from . import secrets
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'j=vjgcylqk!c14w(8)25hyn&g8-f#&&a6nkk@3e7z+54^%3^wj'
+SECRET_KEY = secrets.secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -131,15 +132,18 @@ LOGIN_REDIRECT_URL = 'events:events_list'
 LOGOUT_REDIRECT_URL = 'events:events_list'
 
 # Email Settings
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# For deployment the followinng is needed
-# host: EMAIL_HOST
-# port: EMAIL_PORT
-# username: EMAIL_HOST_USER
-# password: EMAIL_HOST_PASSWORD
-# use_tls: EMAIL_USE_TLS
-# use_ssl: EMAIL_USE_SSL
-# timeout: EMAIL_TIMEOUT
-# ssl_keyfile: EMAIL_SSL_KEYFILE
-# ssl_certfile: EMAIL_SSL_CERTFILE
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    # For deployment the followinng is needed
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'EventManagement Admin'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = secrets.email_address
+    EMAIL_HOST_PASSWORD = secrets.email_password
+    EMAIL_USE_TLS = True
+    # use_ssl: EMAIL_USE_SSL
+    # timeout: EMAIL_TIMEOUT
+    # ssl_keyfile: EMAIL_SSL_KEYFILE
+    # ssl_certfile: EMAIL_SSL_CERTFILE
