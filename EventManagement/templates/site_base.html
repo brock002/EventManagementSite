@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% block headblock %}
+      
+    {% endblock headblock %}
+	
+	{% include 'cdn_links.html' %}
+    
+    <!-- Local css -->
+    <link rel="stylesheet" href="{% static  'events/master.css' %}">
+
+</head>
+<body>
+	
+	{% block navblock %}
+		
+	{% endblock navblock %}
+		
+    <div class="m-3 border-dark">
+		{% block content %}
+			
+		{% endblock %}
+    </div>
+        
+</body>
+<script src="{% static 'events/myscript.js' %}"></script>
+</html>

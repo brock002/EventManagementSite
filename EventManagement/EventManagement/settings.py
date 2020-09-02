@@ -25,9 +25,9 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = secrets.secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = secrets.debug
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = secrets.allowed_hosts
 
 
 # Application definition

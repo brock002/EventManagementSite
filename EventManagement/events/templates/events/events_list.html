@@ -1,5 +1,14 @@
-{% extends 'events/base.html' %}
+{% extends 'site_base.html' %}
 {% load dictionary_lookup %}
+
+{% block headblock %}
+    <title>Events in {{city.name|title}} | EventManagement Project</title>
+{% endblock headblock %}
+
+{% block navblock %}
+    {% include 'navbar.html' %}
+{% endblock navblock %} 
+
 {% block content %}
 
 <!-- Events followed by the user -->
@@ -93,4 +102,4 @@
 {% endfor %}
 
 
-{% endblock %}
+{% endblock content %}

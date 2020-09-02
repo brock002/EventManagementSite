@@ -1,5 +1,12 @@
-{% extends 'events/base.html' %}
+{% extends 'site_base.html' %}
 
+{% block headblock %}
+    <title>{{event.name}} Details | EventManagement Project</title>
+{% endblock headblock %}
+
+{% block navblock %}
+    {% include 'navbar.html' %}
+{% endblock navblock %} 
 
 {% block content %}
 
@@ -153,5 +160,5 @@
     </div>
 </div>         
 
-{% endblock %}
+{% endblock content %}
     

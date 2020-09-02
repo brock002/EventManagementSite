@@ -1,5 +1,13 @@
-{% extends 'events/base.html' %}
+{% extends 'site_base.html' %}
 {% load bootstrap4 %}
+
+{% block headblock %}
+    <title>Extend User Details | EventManagement Project</title>
+{% endblock headblock %}
+
+{% block navblock %}
+    {% include 'navbar.html' %}
+{% endblock navblock %}
 
 {% block content %}
 <div class="container border border-success mt-2">
@@ -12,4 +20,4 @@
         </div>
     </form>
 </div>
-{% endblock %}
+{% endblock content %}
