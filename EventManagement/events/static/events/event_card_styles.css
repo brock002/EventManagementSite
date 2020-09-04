@@ -1,0 +1,70 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+img {
+    width: 300px;
+    height: 200px;
+}
+
+.card {
+    position: relative;
+    margin: 5px 5px 10px 5px;
+    overflow: hidden;
+}
+
+.card .card-img {
+    font-size: 0;
+}
+
+.card .card-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    padding-top: 25px;
+    top: calc(100% - 60px);
+    left: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.72);
+    transition: .5s;
+}
+
+.card:hover .card-text{
+    top: 0;
+}
+
+.card .card-text h2 {
+    height: 45px;
+    color: #ffffff;
+    font-size: 20px;
+    margin: -15px 0 10px 0;
+    transition: .5s;
+}
+
+.card:hover .card-text h2 {
+    margin: 0;
+    font-weight: bold;
+}
+
+.card .card-text p {
+    color: #ffffff;
+    font-size: 16px;
+    margin: 0 0 20px 0;
+}
+
+.event-card-btn {
+    font-size: 15px;
+}
+
+.solid-white-line {
+    border-top: 1px solid white;
+}
+
+.special-btn {
+    font-size: 15px;
+    padding: 0 0 0 0;
+    border-width: 0.01em;
+}

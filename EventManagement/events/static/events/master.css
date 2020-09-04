@@ -21,3 +21,22 @@ a{
 .modal-header {
     background-color: #14272e;
 }
+
+.nav-icon {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 2px;
+    width: fit-content;
+}
+
+.hidden-text {
+    display: none;
+}
+
+.hover-blue:hover {
+    background-color: blue;
+}
+
+.hover-border:hover {
+    border-bottom: 1px solid white;
+}
