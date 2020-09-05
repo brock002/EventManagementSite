@@ -1,0 +1,70 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: #14272e;
+    color: white;
+    /* font-family: 'Ubuntu Condensed', sans-serif; */
+    /* font-family: 'Balsamiq Sans', cursive; */
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+a{
+    color: aqua;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-header {
+    background-color: #14272e;
+}
+
+.nav-icon {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 1px 3px 1px 3px;
+    transition-property: width;
+    transition-timing-function: linear;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#nav-home-icon {
+    font-size: 22px;
+    width: 30px;
+    transition-duration: 0.3s;
+}
+
+#nav-home-icon:hover {
+    width: 90px;
+}
+
+#nav-login-icon {
+    font-size: 18px;
+    width: 50px;
+    transition-duration: 0.5s;
+}
+
+#nav-login-icon:hover {
+    width: 160px;
+}
+
+.nav-hidden-text {
+    display: inline-block;
+}
+
+.hover-blue:hover {
+    background-color: blue;
+}
+
+.hover-border:hover {
+    font-weight: bold;
+    border-bottom: 1px solid white;
+}
+
+#searchInput::placeholder {
+    font-family: 'Ubuntu Condensed', sans-serif;
+}

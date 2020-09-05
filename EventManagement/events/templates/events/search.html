@@ -20,11 +20,11 @@
                   Date
                 </a>
               
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'events:search_categories' city_pk=city.pk category_pk=category.pk filter='week' %}">This Weekend</a>
-                    <a class="dropdown-item" href="{% url 'events:search_categories' city_pk=city.pk category_pk=category.pk filter='month' %}">This Month</a>
+                <div class="dropdown-menu bg-dark border" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item text-white hover-blue" href="{% url 'events:search_categories' city_pk=city.pk category_pk=category.pk filter='week' %}">This Weekend</a>
+                    <a class="dropdown-item text-white hover-blue" href="{% url 'events:search_categories' city_pk=city.pk category_pk=category.pk filter='month' %}">This Month</a>
                     {% if filtered %}
-                        <a class="dropdown-item" href="{% url 'events:search_categories' city_pk=city.pk category_pk=category.pk %}">View all</a>  
+                        <a class="dropdown-item text-white hover-blue" href="{% url 'events:search_categories' city_pk=city.pk category_pk=category.pk %}">View all</a>  
                     {% endif %}  
                 </div>
             </div>     
@@ -40,9 +40,9 @@
                 Date
                 </a>
             
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'events:search_strings' city_pk=city.pk sr_string=sr_string filter='week' %}">This Weekend</a>
-                    <a class="dropdown-item" href="{% url 'events:search_strings' city_pk=city.pk sr_string=sr_string filter='month' %}">This Month</a> 
+                <div class="dropdown-menu bg-dark border" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item text-white hover-blue" href="{% url 'events:search_strings' city_pk=city.pk sr_string=sr_string filter='week' %}">This Weekend</a>
+                    <a class="dropdown-item text-white hover-blue" href="{% url 'events:search_strings' city_pk=city.pk sr_string=sr_string filter='month' %}">This Month</a> 
                 </div>
             </div>     
         </div>

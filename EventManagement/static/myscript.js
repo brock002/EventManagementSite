@@ -1,0 +1,3 @@
+$(function() {
+    $('.alwaysOnTooltips').tooltip()
+})
