@@ -22,7 +22,7 @@
                             {% if event_organiser.userextrainfo.profile_pic %}
                                 <img height="100%" width="100%" src="{{ event_organiser.userextrainfo.profile_pic.url }}" class="card-img" alt="No Image Available">
                             {% else %}
-                                <p>No Image Available</p>
+                                <img height="100%" width="100%" src="{{ MEDIA_URL }}no_photo.jpg" class="card-img" alt="No Image Available">
                             {% endif %}
                         </div>
                         <div class="col-md-8">
