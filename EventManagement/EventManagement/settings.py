@@ -10,6 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+"""
+Dev: To run this project create a secrets.py file in this folder to contain all the sensitive info.
+"""
+
 import os
 from . import secrets
 
