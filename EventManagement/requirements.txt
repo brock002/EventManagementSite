@@ -1,5 +1,5 @@
 # Project Requirements
 python=3.6+
-django=3.0
+django=3.0.3
 pillow
 django-bootstrap4
